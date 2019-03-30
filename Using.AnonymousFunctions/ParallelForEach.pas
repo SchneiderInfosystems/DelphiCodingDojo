@@ -58,6 +58,7 @@ begin
             inc(i);
           end);
     end);
+  // Because of missing message loop in console application TThread.Queue is not handled
   repeat
     CheckSynchronize;
   until res.Completed;
