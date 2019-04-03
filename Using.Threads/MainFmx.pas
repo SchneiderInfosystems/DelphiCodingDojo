@@ -11,10 +11,15 @@ type
   TFmxThreadDemo = class(TForm)
     lstLog: TListBox;
     btnAnonymThread: TButton;
-    btnThreadedQueue: TButton;
+    btnAnonymThreadChecksApplicationEnd: TButton;
+    btnAnonymThreadChecksAppEnd2ndApproach: TButton;
     procedure btnAnonymThreadClick(Sender: TObject);
+    procedure btnAnonymThreadChecksApplicationEndClick(Sender: TObject);
+    procedure btnAnonymThreadChecksAppEnd2ndApproachClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     fLogStarted: cardinal;
+    fAbort, fRunning: boolean;
     procedure StartLog;
     procedure Log(const Msg: string);
     function IsPrime(const n: int64): boolean;
@@ -57,6 +62,86 @@ begin
         inc(c);
       end;
     end).Start;
+end;
+
+procedure TFmxThreadDemo.btnAnonymThreadChecksApplicationEndClick(
+  Sender: TObject);
+const
+  cStartInterval = 10000000001000;
+  cEndInterval =   10000000002000;
+begin
+  StartLog;
+  TThread.CreateAnonymousThread(
+    procedure
+    var
+      c, i: Int64;
+    begin
+      i := 0; // Ermittelt rechenintensive Primzahlen
+      c := cStartInterval;
+      while (c <= cEndInterval) and not Application.Terminated do  // Additional Check
+      begin
+        if IsPrime(c) then
+        begin
+          TThread.Queue(nil, // Update GUI
+            procedure
+            begin
+              Log(Format('%3d : %d', [i, c]));
+            end);
+          inc(i);
+        end;
+        inc(c);
+      end;
+    end).Start;
+end;
+
+procedure TFmxThreadDemo.btnAnonymThreadChecksAppEnd2ndApproachClick(
+  Sender: TObject);
+const
+  cStartInterval = 100000000010000; // 10 times greater than in other examples
+  cEndInterval =   100000000020000;
+begin
+  fRunning := true;
+  fAbort := false;
+  btnAnonymThreadChecksAppEnd2ndApproach.Enabled := false;
+  StartLog;
+  TThread.CreateAnonymousThread(
+    procedure
+    var
+      c, i: Int64;
+    begin
+      i := 0; // Ermittelt rechenintensive Primzahlen
+      c := cStartInterval;
+      while (c <= cEndInterval) and not fAbort do
+      begin
+        if IsPrime(c) then
+        begin
+          TThread.Queue(nil, // Update GUI
+            procedure
+            begin
+              Log(Format('%3d : %d', [i, c]));
+            end);
+          inc(i);
+        end;
+        inc(c);
+      end;
+      // Thread-End reached
+      TThread.Queue(nil,
+        procedure
+        begin
+          btnAnonymThreadChecksAppEnd2ndApproach.Enabled := true;
+        end);
+      fRunning := false;
+    end).Start;
+end;
+
+procedure TFmxThreadDemo.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  fAbort := true;
+  while fRunning do
+  begin
+    Application.ProcessMessages;
+    Sleep(50);
+  end;
 end;
 
 function TFmxThreadDemo.IsPrime(const n: int64): boolean;
