@@ -36,8 +36,6 @@ procedure TfmxMain.btnParallelForClick(Sender: TObject);
 const
   cStartInterval = 10000000001000;
   cEndInterval =   10000000002000;
-//var
-//  res: TParallel.TLoopResult;
 begin
   StartLog;
   TParallel.For(cStartInterval, cEndInterval,

@@ -40,6 +40,8 @@ begin
     MyLst.Add(TMyRec.Create(17, 'Rolf', 'Müller'));
     MyLst.Add(TMyRec.Create(14, 'Rolf', 'Meier'));
     MyLst.Add(TMyRec.Create(2, 'Hugo', 'Meier'));
+    MyLst.Add(TMyRec.Create(4, 'Hugo', 'Meier'));
+
 
     Writeln('Unsorted -------------------------------------------------------');
     for MyRec in MyLst do
