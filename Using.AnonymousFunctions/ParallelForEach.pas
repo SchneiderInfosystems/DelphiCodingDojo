@@ -22,7 +22,7 @@ begin
       if n mod i = 0 then
         exit(false);
   end;
-  result := n > 0;
+  result := n > 1;
 end;
 
 procedure TestParallelForEach;
