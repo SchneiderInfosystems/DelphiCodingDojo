@@ -12,6 +12,9 @@
         <Projects Include="Using.Threads\ThreadDemo.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Using.Parallels\ParallelsDemo.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="ThreadDemo:Make">
         <MSBuild Projects="Using.Threads\ThreadDemo.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ParallelsDemo">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj"/>
+    </Target>
+    <Target Name="ParallelsDemo:Clean">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ParallelsDemo:Make">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="GenericsMethodDemo;AnonymousFunctionsDemo;ThreadDemo"/>
+        <CallTarget Targets="GenericsMethodDemo;AnonymousFunctionsDemo;ThreadDemo;ParallelsDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="GenericsMethodDemo:Clean;AnonymousFunctionsDemo:Clean;ThreadDemo:Clean"/>
+        <CallTarget Targets="GenericsMethodDemo:Clean;AnonymousFunctionsDemo:Clean;ThreadDemo:Clean;ParallelsDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="GenericsMethodDemo:Make;AnonymousFunctionsDemo:Make;ThreadDemo:Make"/>
+        <CallTarget Targets="GenericsMethodDemo:Make;AnonymousFunctionsDemo:Make;ThreadDemo:Make;ParallelsDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
