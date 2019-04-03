@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B342636E-070D-48E5-9559-89678308D297}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Using.Generics.Collections\GenericsMethodDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Using.AnonymousFunctions\AnonymousFunctionsDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Using.Threads\ThreadDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Using.Parallels\ParallelsDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="GenericsMethodDemo">
+        <MSBuild Projects="Using.Generics.Collections\GenericsMethodDemo.dproj"/>
+    </Target>
+    <Target Name="GenericsMethodDemo:Clean">
+        <MSBuild Projects="Using.Generics.Collections\GenericsMethodDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GenericsMethodDemo:Make">
+        <MSBuild Projects="Using.Generics.Collections\GenericsMethodDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AnonymousFunctionsDemo">
+        <MSBuild Projects="Using.AnonymousFunctions\AnonymousFunctionsDemo.dproj"/>
+    </Target>
+    <Target Name="AnonymousFunctionsDemo:Clean">
+        <MSBuild Projects="Using.AnonymousFunctions\AnonymousFunctionsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AnonymousFunctionsDemo:Make">
+        <MSBuild Projects="Using.AnonymousFunctions\AnonymousFunctionsDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ThreadDemo">
+        <MSBuild Projects="Using.Threads\ThreadDemo.dproj"/>
+    </Target>
+    <Target Name="ThreadDemo:Clean">
+        <MSBuild Projects="Using.Threads\ThreadDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ThreadDemo:Make">
+        <MSBuild Projects="Using.Threads\ThreadDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ParallelsDemo">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj"/>
+    </Target>
+    <Target Name="ParallelsDemo:Clean">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ParallelsDemo:Make">
+        <MSBuild Projects="Using.Parallels\ParallelsDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="GenericsMethodDemo;AnonymousFunctionsDemo;ThreadDemo;ParallelsDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="GenericsMethodDemo:Clean;AnonymousFunctionsDemo:Clean;ThreadDemo:Clean;ParallelsDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="GenericsMethodDemo:Make;AnonymousFunctionsDemo:Make;ThreadDemo:Make;ParallelsDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

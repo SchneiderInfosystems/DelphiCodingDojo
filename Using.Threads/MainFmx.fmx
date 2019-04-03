@@ -7,13 +7,14 @@ object FmxThreadDemo: TFmxThreadDemo
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object lstLog: TListBox
     Anchors = [akLeft, akTop, akRight, akBottom]
     Position.X = 24.000000000000000000
-    Position.Y = 80.000000000000000000
+    Position.Y = 120.000000000000000000
     Size.Width = 593.000000000000000000
-    Size.Height = 321.000000000000000000
+    Size.Height = 281.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     DisableFocusEffect = True
@@ -21,25 +22,38 @@ object FmxThreadDemo: TFmxThreadDemo
     DefaultItemStyles.GroupHeaderStyle = ''
     DefaultItemStyles.GroupFooterStyle = ''
     Viewport.Width = 589.000000000000000000
-    Viewport.Height = 317.000000000000000000
+    Viewport.Height = 277.000000000000000000
   end
   object btnAnonymThread: TButton
     Position.X = 24.000000000000000000
     Position.Y = 16.000000000000000000
-    Size.Width = 361.000000000000000000
-    Size.Height = 22.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 2
-    Text = 'Prime Numbers by anonym Thread'
-    OnClick = btnAnonymThreadClick
-  end
-  object btnThreadedQueue: TButton
-    Position.X = 24.000000000000000000
-    Position.Y = 48.000000000000000000
-    Size.Width = 361.000000000000000000
+    Size.Width = 281.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 4
-    Text = 'Producer/Consumer Threads connected by ThreadedQueue'
+    Text = 'Prime Numbers by anonym Thread'
+    OnClick = btnAnonymThreadClick
+  end
+  object btnAnonymThreadChecksApplicationEnd: TButton
+    Position.X = 24.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 377.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Prime Numbers by anonym Thread with check for Application End'
+    OnClick = btnAnonymThreadChecksApplicationEndClick
+  end
+  object btnAnonymThreadChecksAppEnd2ndApproach: TButton
+    Position.X = 24.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 473.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 
+      'Prime Numbers by anonym Thread with check for Application End (2' +
+      'nd Approach)'
+    OnClick = btnAnonymThreadChecksAppEnd2ndApproachClick
   end
 end
